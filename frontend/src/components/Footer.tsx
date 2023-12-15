@@ -17,8 +17,8 @@ const Footer: React.FC = () => {
               width={20}
               className="mr-1.5 py-2 mx-2"
             />
-            <a href="https://github.com/aws-samples/serverless-pdf-chat">
-              Source code on GitHub
+            <a href="https://tableau.bi.ring.com/#/views/RSSLandingPage/RSSBILandingPage?:iid=1">
+              RSSBI Tableau Landing Page
             </a>
           </div>
         </div>

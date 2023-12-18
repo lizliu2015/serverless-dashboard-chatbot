@@ -18,7 +18,7 @@ const Navigation: React.FC<NavigationProps> = ({
   handleSignOutClick,
 }: NavigationProps) => {
   return (
-    <nav className="bg-violet-900">
+    <nav className="bg-blue-900">
       <div className="container flex flex-wrap items-center justify-between py-3">
         <Link
           to="/"

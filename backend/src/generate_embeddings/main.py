@@ -64,7 +64,8 @@ def lambda_handler(event, context):
         event_body = json.loads(event["Records"][0]["body"])
         document_id = event_body["documentid"]
         user_id = event_body["user"]
-        key = event_body["key"]
+        key = file['Key']
+      #  key = event_body["key"]
         file_name_full = key.split("/")[-1]
 
         set_doc_status(user_id, document_id, "PROCESSING")

@@ -53,29 +53,26 @@ def lambda_handler(event, context):
     if 'Contents' not in response:
         return "No files found in the bucket."
 
-    loader = []  # List to hold all PyPDFLoaders
+    event_body = json.loads(event["Records"][0]["body"])
+    document_id = event_body["documentid"]
+    user_id = event_body["user"]
+    # key = event_body["key"]
+
+    set_doc_status(user_id, document_id, "PROCESSING")
+
+    loaders = []  # List to hold all PyPDFLoaders
     for file in response['Contents']:
         key = file['Key']
         if not key.lower().endswith('.pdf'):
             continue  # Process only PDF files
         file_name_full = key.split('/')[-1]
         
-        # You need a way to determine user_id and document_id for each file
-        event_body = json.loads(event["Records"][0]["body"])
-        document_id = event_body["documentid"]
-        user_id = event_body["user"]
-        key = file['Key']
-      #  key = event_body["key"]
-        file_name_full = key.split("/")[-1]
-
-        set_doc_status(user_id, document_id, "PROCESSING")
-
         # Download the PDF file from the S3 bucket
         s3.download_file(BUCKET, key, f"/tmp/{file_name_full}")
 
         # Utilizes PyPDFLoader to load the PDF file
-        loaders = PyPDFLoader(f"/tmp/{file_name_full}")
-        loader.append(loaders)
+        loader = PyPDFLoader(f"/tmp/{file_name_full}")
+        loaders.append(loader)
 
     bedrock_runtime = boto3.client(
         service_name="bedrock-runtime",
@@ -94,14 +91,14 @@ def lambda_handler(event, context):
         embedding=embeddings,
     )
 #    The generated index files (FAISS and pickle formats) are saved locally and then uploaded to S3 in the user's specific directory.
-    index_from_loader = index_creator.from_loaders(loader)
+    index_from_loader = index_creator.from_loaders(loaders)
 
     index_from_loader.vectorstore.save_local("/tmp")
 
     s3.upload_file(
-        "/tmp/index.faiss", BUCKET, f"{user_id}/{file_name_full}/index.faiss"
+        "/tmp/index.faiss", BUCKET, f"{user_id}/index.faiss"
     )
-    s3.upload_file("/tmp/index.pkl", BUCKET, f"{user_id}/{file_name_full}/index.pkl")
+    s3.upload_file("/tmp/index.pkl", BUCKET, f"{user_id}/index.pkl")
 
 #    Finally, it updates the document's status to "READY" in DynamoDB.
     set_doc_status(user_id, document_id, "READY")

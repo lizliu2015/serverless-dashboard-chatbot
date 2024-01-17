@@ -96,9 +96,9 @@ def lambda_handler(event, context):
     index_from_loader.vectorstore.save_local("/tmp")
 
     s3.upload_file(
-        "/tmp/index.faiss", BUCKET, f"{user_id}/{file_name}/index.faiss"
+        "/tmp/index.faiss", BUCKET, f"{user_id}/{file_name_full}/index.faiss"
     )
-    s3.upload_file("/tmp/index.pkl", BUCKET, f"{user_id}/{file_name}/index.pkl")
+    s3.upload_file("/tmp/index.pkl", BUCKET, f"{user_id}/{file_name_full}/index.pkl")
 
 #    Finally, it updates the document's status to "READY" in DynamoDB.
     set_doc_status(user_id, document_id, "READY")

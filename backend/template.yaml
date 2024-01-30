@@ -288,7 +288,7 @@ Resources:
     Properties:
       CodeUri: src/generate_embeddings/
       Timeout: 180
-      MemorySize: 10240
+      MemorySize: 2048
       Policies:
         - SQSPollerPolicy:
             QueueName: !GetAtt EmbeddingQueue.QueueName
@@ -316,8 +316,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src/generate_response/
-      Timeout: 60
-      MemorySize: 10240
+      Timeout: 30
+      MemorySize: 2048
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref MemoryTable

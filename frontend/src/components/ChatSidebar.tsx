@@ -23,6 +23,10 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
   conversationListStatus,
 }) => {
   return (
+  <div className="col-span-4 h-full">
+    <div className="bg-gray-100 p-5">
+
+    </div>
     <div className="col-span-4 h-full">
       <div className="bg-gray-100 p-5">
         <DocumentDetail {...conversation.document} />

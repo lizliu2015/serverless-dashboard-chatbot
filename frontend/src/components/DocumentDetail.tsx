@@ -16,6 +16,7 @@ const DocumentDetail: React.FC<Document> = (document: Document) => {
       <h3 className="text-center mb-3 text-lg font-bold tracking-tight text-gray-900">
         {document.filename.replace(/\.pdf$/i, '')}
       </h3>
+      <div className="flex flex-col space-y-2">
         <div className="inline-flex items-center">
           <ClockIcon className="w-4 h-4 mr-2" />
           {getDateTime(document.created)}

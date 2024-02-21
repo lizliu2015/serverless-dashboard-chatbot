@@ -54,7 +54,7 @@ const DocumentUploader: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '1px', height: '1px', opacity: 0.01, overflow: 'hidden' }}>
       <h2 className="text-2xl font-bold pb-4">Add document</h2>
       {inputStatus === "idle" && (
         <div className="flex items-center justify-center w-full">

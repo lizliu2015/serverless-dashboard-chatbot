@@ -61,7 +61,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
                 : "block w-full p-4 pl-4 text-sm text-gray-900 border border-gray-200 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             }
             placeholder={
-              "Ask me anything..."
+              "Ask " + conversation.document.filename + " anything..."
             }
           />
           {messageStatus === "idle" && (

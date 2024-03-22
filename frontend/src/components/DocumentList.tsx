@@ -24,7 +24,7 @@ const DocumentList: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between pt-6 pb-4">
-        <h2 className="text-2xl font-bold">My Topics</h2>
+        <h2 className="text-2xl font-bold">My documents</h2>
         <button
           onClick={fetchData}
           type="button"

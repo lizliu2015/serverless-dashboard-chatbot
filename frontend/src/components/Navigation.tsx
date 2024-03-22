@@ -25,7 +25,7 @@ const Navigation: React.FC<NavigationProps> = ({
           className="inline-flex items-center self-center text-2xl font-semibold whitespace-nowrap text-white"
         >
           <ChatBubbleLeftRightIcon className="w-6 h-6 mr-1.5" />
-          RSSBI Assistant
+          DocChat
         </Link>
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div className="relative ml-3">
